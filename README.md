@@ -1,13 +1,13 @@
 # CHIP-8 Interpreter, Assembler and Disassembler
 
 This package contains a [CHIP-8][wikipedia] SDK (System Development Kit) for Windows, composed by:
-* CHIP-8 **Emulator** and also features:
+* CHIP-8 **Emulator**
 * CHIP-8 **Assembler**
 * CHIP-8 **Disassembler**.
 
 It also supports the SuperChip instructions.
 
-This work is a fork of [wernsey CHIP-8 Tools](https://github.com/wernsey/chip8)
+This work is a fork of [Werner Stoop CHIP-8 Tools](https://github.com/wernsey/chip8)
 
 The motivation for this for is remove the SDL / Linux specific files and make instructions. So, Windows users will have less confusion when building it.
 
@@ -124,7 +124,7 @@ and there were some discrepancies. This is how I handled them:
   a good value to start with.
 
 ## References and Links
-* [Wernsey CHIP-8 Tools](https://github.com/wernsey/chip8)
+* [Werner Stoop Original CHIP-8 Tools](https://github.com/wernsey/chip8)
 * [Wikipedia entry][wikipedia]
 * [Cowgod's Chip-8 Technical Reference v1.0][cowgod], by Thomas P. Greene,
 * [How to write an emulator (CHIP-8 interpreter)][muller] by Laurence Muller (archived)
