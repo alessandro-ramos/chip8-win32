@@ -21,7 +21,7 @@ programs in his [GAMES.zip](http://devernay.free.fr/hacks/chip8/GAMES.zip).
 ## Compilation and Usage
 
 * Windows: The system was built and tested with the
-  [MinGW](http://www.mingw.org/) tools. To compile it type `mingw32-make` from a *Git Bash* shell.
+  [MinGW](https://sourceforge.net/projects/mingw/) tools. To compile it type `mingw32-make` from a *Git Bash* shell.
 
 To use the emulator:
 
