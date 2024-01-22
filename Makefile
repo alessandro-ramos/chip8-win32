@@ -3,14 +3,8 @@ CC=gcc
 CFLAGS=-c -Wall
 LDFLAGS=-lm
 
-# Detect operating system:
-# More info: http://stackoverflow.com/q/714100
-ifeq ($(OS),Windows_NT)
-  EXECUTABLES=chip8 chip8-gdi
-  LDFLAGS+=-mwindows
-else
-  EXECUTABLES=chip8
-endif
+EXECUTABLES=chip8
+LDFLAGS+=-mwindows
 
 ifeq ($(BUILD),debug)
   # Debug
@@ -44,15 +38,15 @@ chip8.o: chip8.c chip8.h
 dasmmain.o: dasmmain.c chip8.h
 render.o: render.c gdi/gdi.h gdi/../bmp.h gdi/../app.h chip8.h bmp.h
 gdi.o: gdi/gdi.c gdi/../bmp.h gdi/gdi.h gdi/../app.h
-pocadv.o: sdl/pocadv.c sdl/pocadv.h sdl/../app.h sdl/../bmp.h
+#pocadv.o: sdl/pocadv.c sdl/pocadv.h sdl/../app.h sdl/../bmp.h
 
 # SDL specific:
-chip8: pocadv.o render-sdl.o chip8.o bmp.o
-	$(CC) $^ $(LDFLAGS) `sdl2-config --libs` -o $@
-render-sdl.o: render.c chip8.h sdl/pocadv.h app.h bmp.h
-	$(CC) $(CFLAGS) -DSDL2 `sdl2-config --cflags` $< -o $@
-pocadv.o: sdl/pocadv.c sdl/pocadv.h app.h bmp.h
-	$(CC) $(CFLAGS) -DSDL2 `sdl2-config --cflags` $< -o $@
+#chip8: pocadv.o render-sdl.o chip8.o bmp.o
+#	$(CC) $^ $(LDFLAGS) `sdl2-config --libs` -o $@
+#render-sdl.o: render.c chip8.h sdl/pocadv.h app.h bmp.h
+#	$(CC) $(CFLAGS) -DSDL2 `sdl2-config --cflags` $< -o $@
+#pocadv.o: sdl/pocadv.c sdl/pocadv.h app.h bmp.h
+#	$(CC) $(CFLAGS) -DSDL2 `sdl2-config --cflags` $< -o $@
 
 # Example
 example : examples/CUBE8.ch8
@@ -61,7 +55,7 @@ examples/CUBE8.ch8 : examples/cube.asm ./c8asm
 	./c8asm -o $@ $<
 
 # Windows GDI-version specific:
-chip8-gdi: gdi.o render-gdi.o chip8.o bmp.o
+chip8: gdi.o render-gdi.o chip8.o bmp.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 render-gdi.o: render.c chip8.h gdi/gdi.h app.h bmp.h
 	$(CC) $(CFLAGS) -DGDI $< -o $@
@@ -83,7 +77,7 @@ README.html: README.md d.awk
 .PHONY : clean wipe
 
 wipe:
-	-rm -f *.o sdl/*.o gdi/*.o
+	-rm -f *.o gdi/*.o
 
 clean: wipe
 	-rm -f c8asm chip8 c8dasm *.exe

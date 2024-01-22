@@ -1,9 +1,15 @@
 # CHIP-8 Interpreter, Assembler and Disassembler
 
-This package contains an interpreter for [CHIP-8][wikipedia] as well as a
-command-line assembler and disassembler.
+This package contains a [CHIP-8][wikipedia] SDK (System Development Kit) for Windows, composed by:
+* CHIP-8 **Emulator** and also features:
+* CHIP-8 **Assembler**
+* CHIP-8 **Disassembler**.
 
 It also supports the SuperChip instructions.
+
+This work is a fork of [wernsey CHIP-8 Tools](https://github.com/wernsey/chip8)
+
+The motivation for this for is remove the SDL / Linux specific files and make instructions. So, Windows users will have less confusion when building it.
 
 The syntax of the assembler and disassembler is based on the syntax described
 in [Cowgod's Chip-8 Technical Reference v1.0][cowgod], by Thomas P. Greene
@@ -14,16 +20,12 @@ programs in his [GAMES.zip](http://devernay.free.fr/hacks/chip8/GAMES.zip).
 
 ## Compilation and Usage
 
-* Linux: Type `make` from the shell.
 * Windows: The system was built and tested with the
-  [MinGW](http://www.mingw.org/) tools. To compile it type `make` from the MSYS
-  shell.
+  [MinGW](http://www.mingw.org/) tools. To compile it type `mingw32-make` from a *Git Bash* shell.
 
 To use the emulator:
 
-* Under Linux: Type `./chip8 game.ch8` where game.ch8 is the binary CHIP-8 file.
-* Under Windows: Type `chip8 game.ch8` or `chip8-gdi game.ch8` depending on
-  which of the implementations (see below) you want to use.
+* Under Windows: Type `$ ./chip8 [path-to-your-game.ch8]`.
 
 The assembler and disassemblers are simple command line applications and
 platform independent.
@@ -50,11 +52,9 @@ implementations.
 The API is described in `chip8.h`. The `docs` target in the Makefile generates
 HTML documentation from it.
 
-Two implementations are provided in this repository:
+There is only one implementation provided in this repository:
 
-1. A SDL-based implentation (<https://www.libsdl.org/>) which is intended for
-  portability, and
-2. a native Windows implementation which is intended for small size and
+Native Windows implementation which is intended for small size and
   requires no third party dependencies.
 
 In both versions
@@ -76,31 +76,7 @@ game. The program counter and the current instruction will be displayed at the
 bottom of the screen, along with the values of the 16 Vx registers. Press F6 to
 step through the program to the next instruction and F8 to resume the program.
 
-The `Makefile` will build the SDL version by default, and build the GDI version
-under Windows.
-
-### SDL Implementation
-
-The SDL-based implementation is intended for portability. The files `pocadv.c`
-and `pocadv.h` implement a wrapper around the SDL that contains the `main()`
-function, the SDL event loops and so on.
-
-The included `emscripten.mak` file is used to compile the SDL implementation to
-JavaScript with [Emscripten](http://emscripten.org/) for running the
-interpreter in a web browser. The `chip8.html` is a wrapper around the
-Emscripten-generated JavaScript. If you want to use this implementation:
-
-1. You need to put your CHIP-8 binary file in a `./GAMES/` directory
-2. Run `make -f emscripten.mak`
-3. Change the `Module.arguments` variable in the JavaScript in `chip8.html`
-4. Serve `chip8.html` in a web server.
-
-I built the emscripten version through the emscripten SDK installed
-according to the [installation instructions][emscripten-install]. I had
-some linker errors with Ubuntu's `emscripten` package that I couldn't
-resolve.
-
-[emscripten-install]: http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#sdk-download-and-install
+The `Makefile` will build this GDI version by default.
 
 ### Win32/GDI Implementation
 
@@ -115,7 +91,7 @@ function to draw the screen.
 
 ## Implementation Notes
 
-I've consulted several sources for my implementation (see references below),
+The original author consulted several sources for his implementation (see references below),
 and there were some discrepancies. This is how I handled them:
 
 * Regarding `2nnn`, [cowgod][] says the stack pointer is incremented first (i.e.
@@ -148,7 +124,7 @@ and there were some discrepancies. This is how I handled them:
   a good value to start with.
 
 ## References and Links
-
+* [Wernsey CHIP-8 Tools](https://github.com/wernsey/chip8)
 * [Wikipedia entry][wikipedia]
 * [Cowgod's Chip-8 Technical Reference v1.0][cowgod], by Thomas P. Greene,
 * [How to write an emulator (CHIP-8 interpreter)][muller] by Laurence Muller (archived)
