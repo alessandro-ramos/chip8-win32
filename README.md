@@ -1,4 +1,4 @@
-# CHIP-8 Interpreter, Assembler and Disassembler
+# CHIP-8 SDK: Emulator, Assembler and Disassembler
 
 This package contains a [CHIP-8][wikipedia] SDK (System Development Kit) for Windows, composed by:
 * CHIP-8 **Emulator**
@@ -21,7 +21,7 @@ programs in his [GAMES.zip](http://devernay.free.fr/hacks/chip8/GAMES.zip).
 ## Compilation and Usage
 
 * Windows: The system was built and tested with the
-  [MinGW](https://sourceforge.net/projects/mingw/) tools. To compile it type `mingw32-make` from a *Git Bash* shell.
+  [MinGW](https://sourceforge.net/projects/mingw/files/Installer/) tools. To compile it type `mingw32-make` from a *Git Bash* shell.
 
 To use the emulator:
 
